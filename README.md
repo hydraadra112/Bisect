@@ -1,88 +1,80 @@
-# **Bisection Method - Root Finding**
+# Bisect
 
-## Details
+## Overview
+**Bisect** is a deterministic, minimal-dependency numerical optimization engine engineered for robust scalar function evaluation. Built entirely from first principles following the mathematical frameworks in Edwin K. P. Chong & Stanislaw H. Zak's *"An Introduction to Optimization"*, the system features a completely decoupled computational core (`bisection_method.py`) paired with an interactive visual dashboard built on Streamlit. 
 
-A bisection method root finding solver, our final project for **CCS 239 - Optimization Theory and Applications** course.
+This system was originally developed as a standalone optimization tool for the **CCS 239 - Optimization Theory and Applications** course.
 
-Prepared by:
+---
 
-- Artacho, Cristopher Ian
-- Carado, John Manuel
-- Tacuel, Allan Andrews
+## Key Features
+* **Deterministic Core Solver:** A standalone, highly decoupled Python module optimized for execution speed and floating-point precision tolerances.
+* **Symbolic Expression Parsing:** Dynamic parsing of mathematical and polynomial functions via `SymPy` integration.
+* **Interval Boundary Validation:** Automated runtime validation enforcing Intermediate Value Theorem thresholds before algorithm execution.
+* **Iterative Convergence Tracking:** Generates granular execution logs and evaluation matrices for step-by-step matrix rendering.
+* **Visual Telemetry Dashboard:** Interactive plotting layers that pinpoint calculated roots and dynamically map specified interval constraints.
 
-from BSCS 4-A, Batch Ryzen (2022 - 2026).
+---
 
-How to use the bisection method root finding solver:
+## Module Usage
+The core algorithm is decoupled from the rendering layer and can be imported seamlessly into any data pipeline as a standalone API.
 
 ```python
-# Import the custom made module
 from bisection_method import find_root
 
-# Define your function here
+# Define target continuous function
 def f(x):
     return x**3 - 4*x - 9
 
-# Find root
-root, logs = find_root(interval=(2, 3), # Interval to be used, packed as (a, b)
-                tolerance=0.0001, # Tolerance
-                f=f,              # Function to use
-                print_output=True # Optional to see output per iteration
-                get_logs=True     # Optional to get logs of calculation
-                )
+# Execute optimization solver
+root, logs = find_root(
+    interval=(2, 3),       # Packing bounds as (a, b)
+    tolerance=0.0001,      # Target precision threshold (epsilon)
+    f=f,                   # Objective function
+    print_output=True,     # Iteration stdout mirroring
+    get_logs=True          # Execution log matrix retrieval
+)
 
-# Print out root from console
-print(root, logs)
+print(f"Calculated Root: {root}")
 ```
+---
+## Local Setup & Deployment
+This project prioritizes environment reproducibility. We strongly recommend using the `uv` package manager for automated dependency synchronization.
 
-## Setup
-
-To properly set up this application, follow the steps below:
-
-1. **Install `uv` package manager**
-
+### 1. Environment Initialization
+Install the `uv` package manager locally:
 ```bash
-# For MacOS or Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# MacOS / Linux Platforms
+curl -LsSf [https://astral.sh/uv/install.sh](https://astral.sh/uv/install.sh) | sh
 
-# For Windows
-# Open Powershell as Administrator
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# Windows Platforms (Run PowerShell as Administrator)
+powershell -ExecutionPolicy ByPass -c "irm [https://astral.sh/uv/install.ps1](https://astral.sh/uv/install.ps1) | iex"
 ```
-
-You can still use the application without `uv`, as long as you use `pip` to manage your dependencies.
-
-Although we strongly recommend using `uv` (for reproducibility) for anyone with a background in programming, especially if you seek to contribute.
-
-2. **Clone/Download this Repository** (This assumes you have Git installed)
-
+### 2. Repository Cloning & Navigation
+Clone the codebase and step into the project directory:
 ```bash
-# Run this command to clone the repository
-git clone https://github.com/hydraadra112/bisection-method-root-finding.git
+git clone https://github.com/hydraadra112/Bisect.git
+cd Bisect/
 ```
-
-3. **Navigate to the project directory**. You could use the `cd` command in your terminal, or simply open up the terminal where the project is stored.
-
+### 3. Dependency Sync
+Synchronize your local environment dependencies.
 ```bash
-# After cloning
-cd bisection-method-root-finding
-```
-
-4. **Install the Dependencies**
-
-```bash
-# If you use uv
+# Recommended: Automated synchronization via uv
 uv sync
 
-# If you use pip
+# Alternative: Manual installation via pip
 pip install numpy==2.3.5 pandas==2.3.3 streamlit==1.51.0 sympy==1.14.0
+
+# Active your environment variables
+source .venv/bin/activate # MacOS or Linux
+
+.venv\Scripts\activate # For Windows
 ```
 
-4. **Run the Streamlit application**
-
+### 4. Launch
+Boot the Bisect locally
 ```bash
+uv run -- streamlit run streamlit_app.py
+# or 
 streamlit run streamlit_app.py
 ```
-
-And it should open up the Streamlit application in your local files.
-
-**Enjoy root finding!** 😃
