@@ -16,6 +16,13 @@ This system was originally developed as a standalone optimization tool for the *
 
 ---
 
+## Bisect Image
+Below is an image of the dashboard
+![Bisect Image](./images/bisect_image.png)
+
+---
+
+
 ## Module Usage
 The core algorithm is decoupled from the rendering layer and can be imported seamlessly into any data pipeline as a standalone API.
 
