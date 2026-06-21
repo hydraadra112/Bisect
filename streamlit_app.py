@@ -120,7 +120,7 @@ def plot_function(f: Callable, a: Real, b: Real, root: Real) -> None:
 
 def main():
     # STREAMLIT UI
-    st.title("🔢 Bisection Method Root Finder")
+    st.title("🔢 Bisect")
 
     # Create two tabs
     # tab1, tab2 = st.tabs(["Root Finder", "More"])
